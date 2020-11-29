@@ -8,3 +8,4 @@
 2. Sequelize 생성 (module/index.js)
 3. MySQL연결하기 - app.js 작성, config/config.json 작성
 4. 모델 정의하기 - user, comment 모델 작성, models/index에서 연결시킨다.
+5. 관계 정의하기
