@@ -41,5 +41,8 @@ module.exports = class User extends (
       }
     );
   }
-  static associate(db) {}
+  //관계 정의하기
+  static associate(db) {
+    db.User.hasMany(db.Comment, { foreignKey: "commenter", sourceKey: "id" });
+  }
 };
