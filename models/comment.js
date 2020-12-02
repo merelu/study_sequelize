@@ -31,6 +31,6 @@ module.exports = class Comment extends (
 
   //관계 정의하기
   static associate(db) {
-    db.User.belongsTo(db.User, { foreignKey: "commenter", targetKey: "id" });
+    db.Comment.belongsTo(db.User, { foreignKey: "commenter", targetKey: "id" });
   }
 };

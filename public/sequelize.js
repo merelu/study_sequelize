@@ -1,5 +1,5 @@
 //사용자 이름을 눌렀을 때 댓글 로딩
-document.querySelector("#user-list tr").forEach((el) => {
+document.querySelectorAll("#user-list tr").forEach((el) => {
   el.addEventListener("click", function () {
     const id = el.querySelector("td").textContent;
     getComment(id);
@@ -47,8 +47,8 @@ async function getUser() {
 async function getComment(id) {
   try {
     const res = await axios.get(`/users/${id}/comments`);
-    const comments = res.gata;
-    const tbody = document.querySelector("comment-list tbody");
+    const comments = res.data;
+    const tbody = document.querySelector("#comment-list tbody");
     tbody.innerHTML = "";
     comments.map(function (comment) {
       const row = document.createElement("tr");
@@ -92,11 +92,11 @@ async function getComment(id) {
       // 버튼 추가
       td = document.createElement("td");
       td.appendChild(edit);
-      row.appendchild(td);
+      row.appendChild(td);
       td = document.createElement("td");
       td.appendChild(remove);
-      row.appendchild(td);
-      tbody.appendchild(row);
+      row.appendChild(td);
+      tbody.appendChild(row);
     });
   } catch (err) {
     console.error(err);
@@ -110,10 +110,10 @@ document.getElementById("user-form").addEventListener("submit", async (e) => {
   const age = e.target.age.value;
   const married = e.target.married.checked;
   if (!name) {
-    alert("이름을 입력하세요!");
+    return alert("이름을 입력하세요!");
   }
   if (!age) {
-    alert("나이를 입력하세요!");
+    return alert("나이를 입력하세요!");
   }
   try {
     await axios.post("/users", { name, age, married });
@@ -131,20 +131,20 @@ document
   .getElementById("comment-form")
   .addEventListener("submit", async (e) => {
     e.preventDefault();
-    const userid = e.target.userid.value;
+    const id = e.target.userid.value;
     const comment = e.target.comment.value;
-    if (!userid) {
-      alert("사용자 아이디를 입력하세요!");
+    if (!id) {
+      return alert("사용자 아이디를 입력하세요!");
     }
     if (!comment) {
-      alert("댓글을 입력하세요!");
+      return alert("댓글을 입력하세요!");
     }
     try {
-      await axios.post("/comments", { userid, comment });
-      getComment(userid);
+      await axios.post("/comments", { id, comment });
+      getComment(id);
     } catch (err) {
       console.error(err);
     }
-    e.target.userid.value = "";
+    e.target.id.value = "";
     e.target.comment.value = "";
   });
