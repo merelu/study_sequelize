@@ -59,11 +59,11 @@ async function getComment(id) {
       td.textContent = comment.User.name;
       row.appendChild(td);
       td = document.createElement("td");
-      td.textContent = comment.text;
+      td.textContent = comment.comment;
       row.appendChild(td);
 
       const edit = document.createElement("button");
-      edit.textContent("수정");
+      edit.textContent = "수정";
       edit.addEventListener("click", async () => {
         //수정 클릭 시
         const newComment = prompt("바꿀 내용을 입력하세요.");
@@ -79,7 +79,7 @@ async function getComment(id) {
       });
       //삭제 클릭 시
       const remove = document.createElement("button");
-      remove.textContent("삭제");
+      remove.textContent = "삭제";
       remove.addEventListener("click", async () => {
         try {
           await axios.delete(`/comments/${comment.id}`);
@@ -145,6 +145,6 @@ document
     } catch (err) {
       console.error(err);
     }
-    e.target.id.value = "";
+    e.target.userid.value = "";
     e.target.comment.value = "";
   });
